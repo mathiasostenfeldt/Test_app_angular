@@ -1,10 +1,69 @@
-<nav class="navbar navbar-expand navbar-light bg-light">
-  <div class="navbar-nav">
-    <button color="accent" mat-button [matMenuTriggerFor]="menu" >Menu</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>    
-  </div>
-</nav>
-<mat-checkbox></mat-checkbox>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button [ngSwitch]="sidenav.opened">
+          <mat-icon *ngSwitchCase="false" (click)="sidenav.toggle()">menu</mat-icon>
+          <mat-icon *ngSwitchCase="true" (click)="sidenav.toggle()">close</mat-icon>
+      </button>
+      <h1>Fake Enigma</h1>
+      <span class="menu-spacer"></span>
+      <div *ngIf="loggedIn">
+        <a mat-icon-button [routerLink]="'/accounts'">
+          <mat-icon>account_circle</mat-icon>
+        </a>
+        <a mat-icon-button [routerLink]="'/notifications'">
+          <mat-icon>notifications_none</mat-icon>
+        </a>
+        <a mat-icon-button [routerLink]="'/create-account'">
+          <mat-icon>exit_to_app</mat-icon>
+        </a>
+      </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+  <mat-sidenav-container>
+      <mat-sidenav #sidenav>
+        <mat-action-list role="list">
+          <mat-list-item matTooltip="Medlemsstyring">
+            <button>
+              <mat-icon>people</mat-icon> 
+            </button>
+          </mat-list-item>
+          <mat-list-item matTooltip="Opgavestyring">
+            <button>
+              <mat-icon>assignment</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item matTooltip="Diverse">
+            <button>
+              <mat-icon>assignment_turned_in</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item matTooltip="IP-telefoni">
+            <button>
+              <mat-icon>call</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item matTooltip="Modemstyring">
+            <button>
+              <mat-icon>signal_wifi_4_bar</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item matTooltip="Email">
+            <button>
+              <mat-icon>email</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item matTooltip="TV">
+            <button>
+              <mat-icon>video_label</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-action-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div style="height: 88vh;">
+    
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
